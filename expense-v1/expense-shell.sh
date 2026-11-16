@@ -26,7 +26,7 @@ instance_id=$(
   --region "$region" \
   --image-id "$ami_id" \
   --instance-type "$instance_type" \
-  --security-groups "database" \
+  --security-groups "$instance" \
   --tag-specifications "ResourceType=instance,Tags=[{Key=Name, Value=$instance}]" \
   --query "Instances[].InstanceId" \
   --output text
