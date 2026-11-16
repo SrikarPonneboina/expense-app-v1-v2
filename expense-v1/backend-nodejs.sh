@@ -91,7 +91,7 @@ npm install &>> "$LOG_FILE"
 validate "$?" "installing dependencies"
 
 
-cp backend.service /etc/systemd/system/
+cp backend.service /etc/systemd/system/backend.service
 validate "$?" "copying backend file to systemd"
 
 
