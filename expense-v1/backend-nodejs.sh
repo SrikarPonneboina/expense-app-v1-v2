@@ -1,5 +1,6 @@
 #!/bin/bash
 
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 LOGS_FOLDER="/var/log/expense"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1) 
 #here script_name captures backend. .. $0 is the special variable which takes the script name and where we are seperating frontend.sh with (.).
@@ -93,7 +94,7 @@ npm install &>> "$LOG_FILE"
 validate "$?" "installing dependencies"
 
 
-cp backend.service /etc/systemd/system/backend.service
+cp "$SCRIPT_DIR"/backend.service /etc/systemd/system/backend.service
 validate "$?" "copying backend file to systemd"
 
 
@@ -122,5 +123,15 @@ validate "$?" "start and enable server"
 
 echo "================================="
 echo "Script completed at: $(date)" | tee -a "$LOG_FILE"
+echo "================================="
 
 echo "Script took $SECONDS Seconds to complete"
+
+
+
+# SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+# I'm expanding the script correct if it is wrong
+# when i give "$0" it takes path /home/ec2-user/expense-app-v1-v2/expense-v1/backend-nginx.sh
+# when i give it with dirname "$0" it takes path /home/ec2-user/expense-app-v1-v2/expense-v1
+# last one is stripped from the path
+# and then it is giving cd  /home/ec2-user/expense-app-v1-v2/expense-v1 and checking for pwd which also prints the same /home/ec2-user/expense-app-v1-v2/expense-v1
