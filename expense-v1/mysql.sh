@@ -25,16 +25,20 @@ fi
 echo "configure mysql server"
 echo "-------------------------"
 
+timestamp(){
+    date +"%d-%b-%Y-%I-%M-%S-%p"
+}
 validate(){
     exitstatus=$1
     description=$2
-    if [ $exit_status -ne 0 ]; then
-        echo -e "${description}..${R}FAILED${RESET}" | tee -a "$LOG_FILE"
+    if [ "$exitstatus" -ne 0 ]; then
+        echo -e "$(timestamp) ${description}..${R}FAILED${RESET}" | tee -a "$LOG_FILE"
         exit 1
     else
-        echo -e "${description}..${BG}SUCCESS${RESET}" | tee -a "$LOG_FILE"
+        echo -e "$(timestamp) ${description}..${BG}SUCCESS${RESET}" | tee -a "$LOG_FILE"
     fi
 }
+
 
 echo "Script started at: $(date)" | tee -a "$LOG_FILE"
 echo "================================="
@@ -54,5 +58,6 @@ validate "$?" "setting up mysql root password for database"
 echo "================================="
 echo "Script completed at: $(date)" | tee -a "$LOG_FILE"
 
-
+echo "================================="
+echo "Script took $SECONDS Seconds to complete"
 

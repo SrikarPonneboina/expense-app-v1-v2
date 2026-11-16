@@ -24,15 +24,17 @@ fi
 
 echo "configure backend nginx"
 echo "----------------------------"
-
+timestamp(){
+    date +"%d-%b-%Y-%I-%M-%S-%p"
+}
 validate(){
     exitstatus=$1
     description=$2
     if [ "$exitstatus" -ne 0 ]; then
-        echo -e "${description}..${R}FAILED${RESET}" | tee -a "$LOG_FILE"
+        echo -e "$(timestamp) ${description}..${R}FAILED${RESET}" | tee -a "$LOG_FILE"
         exit 1
     else
-        echo -e "${description}..${BG}SUCCESS${RESET}" | tee -a "$LOG_FILE"
+        echo -e "$(timestamp) ${description}..${BG}SUCCESS${RESET}" | tee -a "$LOG_FILE"
     fi
 }
 
@@ -121,3 +123,4 @@ validate "$?" "start and enable server"
 echo "================================="
 echo "Script completed at: $(date)" | tee -a "$LOG_FILE"
 
+echo "Script took $SECONDS Seconds to complete"
