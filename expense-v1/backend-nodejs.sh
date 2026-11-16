@@ -101,16 +101,16 @@ validate "$?" "copying backend file to systemd"
 dnf install mysql -y &>> "$LOG_FILE"
 validate "$?" "installing mysql client"
 
-DB_EXISTS=$(mysql -h mysql.srikarlabs.space -u root -p'ExpenseApp@1' -sse "SHOW DATABASES LIKE 'transactions';")
+DB_EXISTS=$(mysql -h database.srikarlabs.space -u root -p'ExpenseApp@1' -sse "SHOW DATABASES LIKE 'transactions';")
 
 if [ "$DB_EXISTS" == "transactions" ]; then
     echo "Schema already loaded. Skipping."
 else
-    mysql -h mysql.srikarlabs.space -u root -p'ExpenseApp@1' < /app/schema/backend.sql
+    mysql -h database.srikarlabs.space -u root -p'ExpenseApp@1' < /app/schema/backend.sql
     validate "$?" "load schema data to mysql server"
 fi
 
-# mysql -h mysql.srikarlabs.space -u root -p'ExpenseApp@1' < /app/schema/backend.sql
+# mysql -h database.srikarlabs.space -u root -p'ExpenseApp@1' < /app/schema/backend.sql
 # Takes all the file content from backend.sql and pastes on mysql prompt 
 # when you give < it does not copy the file/folder it copies the fie content
 
