@@ -32,10 +32,10 @@ validate(){
     exitstatus=$1
     description=$2
     if [ "$exitstatus" -ne 0 ]; then
-        echo -e "$(timestamp) [ERROR] ${description}..${R}FAILED${RESET}" | tee -a "$LOG_FILE"
+        echo -e "$(timestamp) ${R}[ERROR]${RESET} ${description}..${R}FAILED${RESET}" | tee -a "$LOG_FILE"
         exit 1
     else
-        echo -e "$(timestamp) [INFO] ${description}..${BG}SUCCESS${RESET}" | tee -a "$LOG_FILE"
+        echo -e "$(timestamp) ${BG}[INFO]${RESET} ${description}..${BG}SUCCESS${RESET}" | tee -a "$LOG_FILE"
     fi
 }
 
