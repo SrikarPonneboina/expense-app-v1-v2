@@ -1,5 +1,6 @@
 #!/bin/bash
 
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 LOGS_FOLDER="/var/log/expense"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1) 
 #here script_name captures frontend. .. $0 is the special variable which takes the script name and where we are seperating frontend.sh with (.).
@@ -62,7 +63,7 @@ cd /usr/share/nginx/html
 tar -xzf /tmp/frontend.tar.gz
 validate "$?" "copy the code to nginx html"
 
-cp expense.conf /etc/nginx/default.d/
+cp "$SCRIPT_DIR"/expense.conf /etc/nginx/default.d/
 validate "$?" "copying configuration file to default.d"
 
 nginx -t
