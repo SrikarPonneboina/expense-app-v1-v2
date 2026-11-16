@@ -98,7 +98,7 @@ cp "$SCRIPT_DIR"/backend.service /etc/systemd/system/backend.service
 validate "$?" "copying backend file to systemd"
 
 
-dnf install mysql -y. &>> "$LOG_FILE"
+dnf install mysql -y &>> "$LOG_FILE"
 validate "$?" "installing mysql client"
 
 DB_EXISTS=$(mysql -h mysql.srikarlabs.space -u root -p'ExpenseApp@1' -sse "SHOW DATABASES LIKE 'transactions';")
