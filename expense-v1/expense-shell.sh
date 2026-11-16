@@ -31,6 +31,7 @@ instance_id=$(
   --query "Instances[].InstanceId" \
   --output text
 )
+
 echo "Launched Instance ID: ${instance_id}"       
 #from the instance id we can get the ip address
 ## in the aws cli I was adding spaces so due to that i was faciing multiple issues and now i resolved tis
