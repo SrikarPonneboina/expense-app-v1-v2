@@ -22,13 +22,13 @@ if [ $user_id -ne 0 ]; then
     exit 1
 fi
 
-echo "configure frontend nginx"
+echo "configure backend nginx"
 echo "----------------------------"
 
 validate(){
     exitstatus=$1
     description=$2
-    if [ $exit_status -ne 0 ]; then
+    if [ "$exitstatus" -ne 0 ]; then
         echo -e "${description}..${R}FAILED${RESET}" | tee -a "$LOG_FILE"
         exit 1
     else
